@@ -3,10 +3,10 @@
 
 // OLED setup
 #define IDLE_FRAMES 5
-#define IDLE_SPEED 30
+#define IDLE_SPEED 5
 #define TAP_FRAMES 2
 #define TAP_SPEED 15
-#define ANIM_FRAME_DURATION 100
+#define ANIM_FRAME_DURATION 170
 #define ANIM_SIZE 512
 
 bool gui_on = true;
@@ -118,16 +118,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
-
-//bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//  if (record->event.pressed) {
-//#ifdef OLED_ENABLE
-//    set_keylog(keycode, record);
-//#endif
-//    // set_timelog();
-//  }
-//  return true;
-//}
 
 //
 // Rotate OLED display

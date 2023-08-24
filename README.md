@@ -16,7 +16,11 @@ Antes de começar, certifique-se de que você tenha o seguinte software instalad
 
 1. [QMK Toolbox](https://qmk.fm/toolbox/) - Para fazer o flash do firmware no teclado.
 2. Editor de código de sua preferência - Para editar os arquivos de configuração.
-
+### Obs:
+* As configurações estão usando:
+  * Arduino Pro Micro
+  * Sem RGB ou qualquer tipo de retro iluminação
+  * Lado esquerdo como `master`
 ## Como Usar
 
 1. Clone este repositório em sua máquina:
@@ -34,6 +38,11 @@ git clone https://github.com/mateuscomh/myKbdLily.git
 4. Flash do firmware:
 
    Utilize o QMK Toolbox para fazer o flash do firmware compilado em seu teclado Lily58.
+   
+   ``` bash
+   qmk flash -kb lily58/rev1 -km lily58l -bl avrdude-split-left
+   qmk compile -kb lily58/rev1 -km lily58l
+   ```
 
 5. Experimente e ajuste:
 

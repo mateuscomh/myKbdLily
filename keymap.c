@@ -3,10 +3,10 @@
 
 // OLED setup
 #define IDLE_FRAMES 5
-#define IDLE_SPEED 5
+#define IDLE_SPEED 3
 #define TAP_FRAMES 2
 #define TAP_SPEED 15
-#define ANIM_FRAME_DURATION 170
+#define ANIM_FRAME_DURATION 150
 #define ANIM_SIZE 512
 
 bool gui_on = true;
@@ -16,7 +16,7 @@ uint32_t anim_sleep = 0;
 uint8_t current_idle_frame = 0;
 uint8_t current_tap_frame = 0;
 
-static long int oled_timeout = 180000; // 3 minutes
+static long int oled_timeout = 60000; // 1 minutes
 
 enum layer_number {
   _QWERTY = 0,

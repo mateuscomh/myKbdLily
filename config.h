@@ -24,9 +24,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SPLIT_USB_DETECT
 #define MASTER_LEFT
+
+// Timeout to check side
 #define SPLIT_USB_TIMEOUT 2000
 #define SPLIT_WATCHDOG_ENABLE
 #define SPLIT_WATCHDOG_TIMEOUT 3000
+
+// oled configs
+#define OLED_TIMEOUT 120000
+#define OLED_BRIGHTNESS 150
 
 // #define MASTER_RIGHT
 // #define EE_HANDS

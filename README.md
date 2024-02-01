@@ -38,13 +38,23 @@ git clone https://github.com/mateuscomh/myKbdLily.git
 4. Flash do firmware:
 
    Utilize o QMK Toolbox para fazer o flash do firmware compilado em seu teclado Lily58.
-   
+
+   Compilar..
    ``` bash
-   qmk flash -kb lily58/rev1 -km lily58l -bl avrdude-split-left
-   qmk compile -kb lily58/rev1 -km lily58l
+   qmk compile -kb lily58/rev1 -km myKbdLily
+   ```
+   Gravar lado direito:
+   ``` bash
+   qmk flash -kb lily58/rev1 -km myKbdLily -bl avrdude-split-right
    ```
 
-5. Experimente e ajuste:
+    Gravar lado esquerdo:
+   ``` bash
+   qmk flash -kb lily58/rev1 -km myKbdLily -bl avrdude-split-left
+   ``` 
+
+
+6. Experimente e ajuste:
 
    Após fazer o flash do firmware, teste o teclado e faça ajustes conforme necessário para atender suas necessidades e preferências.
 

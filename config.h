@@ -34,8 +34,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OLED_TIMEOUT 120000
 #define OLED_BRIGHTNESS 150
 
-#define MOUSEKEY_MAX_SPEED 5
-#define MOUSE_TIME_TO_MAX 80
+#define MOUSE_DELAY 12
+#define MOUSEKEY_MAX_SPEED 4
+#define MOUSE_TIME_TO_MAX 90
+#define MOUSE_MOVE_DELTA 6
+#define MOUSEKEY_INTERVAL 16
 
 #define SPLIT_WPM_ENABLE
 //#define TAPPING_FORCE_HOLD

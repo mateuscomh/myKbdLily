@@ -40,7 +40,7 @@ enum layer_number {
 };
 
 enum custom_keycodes {
-    TAB_HOLD = SAFE_RANGE,
+    CAPS_HOLD = SAFE_RANGE,
     // Adicione outras teclas personalizadas aqui
 };
 
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QWERTY] = LAYOUT(
   QK_GESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  TAB_HOLD,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
   KC_LSFT,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LCTL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_ENT,
                         KC_LALT, KC_LGUI, MO(_LOWER), KC_SPC, KC_BSPC, MO(_RAISE), KC_DEL, KC_RALT
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | M.D  |LEFT | DOWN | RIGHT |      | MB.2  |-------.    ,-------|      |      |      |      |      |      |
  * |------+------+------+------+------+------| ENTER |    |   |/  |------+------+------+------+------+------|
- * |   |  | MLef | MDow | MUP  | MRig |   =  |-------|    |-------|      |      |      |      |  \   |   |  |
+ * | CAPS | MLef | MDow | MUP  | MRig |   =  |-------|    |-------|      |      |      |      |  \   |   |  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | BSPC | LGUI |LOWER | /Space  /       \Backs \  |RAISE |DELETE| RALT |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   KC_WH_U, _______,  KC_UP, _______, _______, KC_BTN1,                   _______, _______, _______, KC_LPRN, KC_RPRN, KC_BSLS,
   KC_WH_D, KC_LEFT,  KC_DOWN, KC_RIGHT, _______, KC_BTN2,                _______, _______, _______,_______, _______, _______,
-  KC_PIPE,  KC_MS_L, KC_MS_D, KC_MS_U,  KC_MS_R, KC_PEQL, KC_ENT,  KC_BSLS, _______, _______, _______, _______, KC_BSLS, KC_PIPE,
+  CAPS_HOLD,  KC_MS_L, KC_MS_D, KC_MS_U,  KC_MS_R, KC_PEQL, KC_ENT,  KC_BSLS, _______, _______, _______, _______, KC_BSLS, KC_PIPE,
                         KC_BSPC, _______, _______, _______,       _______,  _______, _______, _______
 ),
 /* RAISE
@@ -310,13 +310,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint16_t tab_timer;
 
     switch (keycode) {
-        case TAB_HOLD:
+        case CAPS_HOLD:
             if (record->event.pressed) {
                 tab_timer = timer_read();
             } else {
                 if (timer_elapsed(tab_timer) < TAPPING_TERM) {
-                    register_code(KC_TAB);
-                    unregister_code(KC_TAB);
+                    register_code(KC_NUBS);
+                    unregister_code(KC_NUBS);
                 } else {
                     register_code(KC_CAPS);
                     unregister_code(KC_CAPS);

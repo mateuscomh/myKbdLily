@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MASTER_LEFT
 
 // Timeout to check side
-#define SPLIT_USB_TIMEOUT 2000
+#define SPLIT_USB_TIMEOUT 1000
 #define SPLIT_WATCHDOG_ENABLE
 #define SPLIT_WATCHDOG_TIMEOUT 3000
 

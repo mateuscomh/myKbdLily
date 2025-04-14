@@ -35,9 +35,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OLED_BRIGHTNESS 150
 
 #define MOUSE_DELAY 12
-#define MOUSEKEY_MAX_SPEED 4
+#define MOUSEKEY_MAX_SPEED 2
 #define MOUSE_TIME_TO_MAX 90
-#define MOUSE_MOVE_DELTA 6
+#define MOUSE_MOVE_DELTA 4
 #define MOUSEKEY_INTERVAL 16
 
 #define SPLIT_WPM_ENABLE

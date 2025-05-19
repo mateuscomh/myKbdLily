@@ -19,7 +19,7 @@
 #define IDLE_FRAMES 5
 #define IDLE_SPEED 1
 #define TAP_FRAMES 2
-#define TAP_SPEED 25
+#define TAP_SPEED 20
 #define ANIM_FRAME_DURATION 150
 #define ANIM_SIZE 512
 

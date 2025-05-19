@@ -193,16 +193,20 @@ static void render_status(void) {
     oled_write_P(PSTR("\n      LAYER "), false);
 
     switch (get_highest_layer(layer_state)) {
+        case 3:
+            oled_write_P(PSTR("ADJUST"), false);
+            break;
+            // Layer 2
         case 2:
-            oled_write_P(PSTR("RAISE"), false);
+            oled_write_P(PSTR("RAISE "), false);
             break;
             // Layer 1
         case 1:
-            oled_write_P(PSTR("LOWER"), false);
+            oled_write_P(PSTR("LOWER "), false);
             break;
         // Layer 0
         default:
-            oled_write_P(PSTR("BASE "), false);
+            oled_write_P(PSTR("BASE  "), false);
             break;
     }
 }

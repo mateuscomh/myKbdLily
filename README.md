@@ -77,3 +77,7 @@ Lembre-se de que a configuração do teclado é uma preferência pessoal, e este
 
 Este projeto é licenciado sob a [MIT License](https://mit-license.org).
 
+#Copiar para a pasta qmk/keyboard/lily58/mylily58 os 3 arquivos
+#qmk compile -kb lily58 -km mylily58
+#qmk flash -kb lily58 -km mylily58 -bl avrdude-split-left
+#qmk flash -kb lily58 -km mylily58 -bl avrdude-split-right

@@ -200,10 +200,6 @@ static void render_status(void) {
     }
 }
 
-//
-// Render right OLED display animation
-//
-static void render_anim(void) {
     // Idle animation
     static const char PROGMEM idle[IDLE_FRAMES][ANIM_SIZE] = {
 
@@ -243,49 +239,50 @@ static void render_anim(void) {
 
     };
 
-    void render_anim(void) {
-        //    void animation_phase(void) {
-
-        // Verifica a velocidade de digitação (WPM) e seleciona a animação apropriada
-        if (get_current_wpm() <= IDLE_SPEED) {
-            current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
-            oled_write_raw_P(idle[current_idle_frame], ANIM_SIZE); // Exibe o frame atual da animação idle
-        } else if (get_current_wpm() < TAP_SPEED) {
-            oled_write_raw_P(prep[0], ANIM_SIZE); // Exibe a animação de preparação
-        } else {
-            current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
-            oled_write_raw_P(tap[current_tap_frame], ANIM_SIZE); // Exibe o frame atual da animação de digitação
-        }
+//-------------------------------------------------------------------
+// FUNÇÃO "ARTISTA": Decide o que desenhar na tela.
+//-------------------------------------------------------------------
+static void animation_phase(void) {
+    oled_set_cursor(0, 0);
+    // Se a velocidade de digitação (WPM) for muito baixa, consideramos "idle" (ocioso).
+    if (get_current_wpm() <= IDLE_SPEED) {
+        current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
+        oled_write_raw_P(idle[current_idle_frame], ANIM_SIZE);
+    // Se estivermos digitando, mas ainda abaixo da velocidade para a animação "tap".
+    } else if (get_current_wpm() < TAP_SPEED) {
+        oled_write_raw_P(prep[0], ANIM_SIZE);
+    // Se estivermos digitando rápido.
+    } else {
+        current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
+        oled_write_raw_P(tap[current_tap_frame], ANIM_SIZE);
     }
-
-    // Controle de tempo e exibição da animação
-    if (get_current_wpm() != 0) {
-        oled_on();
-
-        if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-            anim_timer = timer_read32();
-            render_anim(); // Atualiza a animação
-        }
-
-        anim_sleep = timer_read32();
-    } else if (timer_elapsed32(anim_sleep) > oled_timeout) {
-        oled_off(); // Desliga o OLED após o tempo de inatividade
-    } else if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-        anim_timer = timer_read32();
-        render_anim(); // Atualiza a animação mesmo em estado ocioso
-    }
-    //    } else {
-    //        if (timer_elapsed32(anim_sleep) > oled_timeout) {
-    //            oled_off();
-    //        } else {
-    //            if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-    //                anim_timer = timer_read32();
-    //                animation_phase();
-    //            }
-    //        }
-    //    }
 }
 
+//-------------------------------------------------------------------
+// FUNÇÃO "GERENTE": Gerencia o tempo e o estado do OLED.
+//-------------------------------------------------------------------
+static void render_anim(void) {
+    // Se o usuário está digitando...
+    if (get_current_wpm() > 0) {
+        oled_on(); // Liga o OLED (caso estivesse desligado).
+        // E reinicia o contador de tempo para desligar por inatividade.
+        anim_sleep = timer_read32();
+    }
+
+    // Se o OLED estiver ligado...
+    if (is_oled_on()) {
+        // O tempo de inatividade já passou?
+        if (timer_elapsed32(anim_sleep) > oled_timeout) {
+            oled_off(); // Desliga o OLED.
+            return; 
+        }
+
+        if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
+            anim_timer = timer_read32(); // Reinicia o timer do frame.
+            animation_phase(); // Chama o "Artista" para desenhar.
+        }
+    }
+}
 // =============================================
 // Tarefa principal do OLED
 // =============================================

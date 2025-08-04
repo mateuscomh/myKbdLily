@@ -85,8 +85,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_LOWER] = LAYOUT(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  MS_WHDU, _______,  KC_UP, _______, MS_WHLL, MS_BTN1,                   _______, _______, _______, KC_LPRN, KC_RPRN, KC_BSLS,
-  MS_WHDL, KC_LEFT,  KC_DOWN, KC_RIGHT, MS_WHLR, MS_BTN2,                _______, _______, _______,_______, _______, KC_GRV,
+  MS_WHLU, _______,  KC_UP, _______, MS_WHLL, MS_BTN1,                   _______, _______, _______, KC_LPRN, KC_RPRN, KC_BSLS,
+  MS_WHLD, KC_LEFT,  KC_DOWN, KC_RIGHT, MS_WHLR, MS_BTN2,                _______, _______, _______,_______, _______, KC_GRV,
   _______,  KC_MS_L, KC_MS_D, KC_MS_U,  KC_MS_R, MS_BTN3, KC_ENT,  KC_BSLS, _______, _______, _______, _______, KC_BSLS, KC_PIPE,
                         KC_BSPC, _______, _______, _______,       _______,  _______, _______, _______
 ),
@@ -141,19 +141,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // =============================================
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Verifica se ambas LOWER e RAISE estão ativas
-    if (layer_state_cmp(state, _LOWER) && layer_state_cmp(state, _RAISE)) {
-        // Ativa ADJUST apenas se ambas estiverem ativas
-        state |= (1UL << _ADJUST);
-    } else {
-        // Desativa ADJUST se não for o caso
-        state &= ~(1UL << _ADJUST);
-    }
-    return state;
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
-//layer_state_t layer_state_set_user(layer_state_t state) {
-//    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-//}
 
 // =============================================
 // Funções do OLED

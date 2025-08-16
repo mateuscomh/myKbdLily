@@ -285,18 +285,10 @@ static void animation_phase(void) {
 }
 
 // Função "Gerente" da animação: Gerencia o tempo e o estado do OLED.
+// Função "Gerente" da animação: Gerencia o tempo e o estado do OLED.
 static void render_anim(void) {
-    if (get_current_wpm() > 0) {
-        oled_on();
-        anim_sleep = timer_read32();
-    }
-
+    // Apenas verifica se o OLED está ligado para desenhar a animação
     if (is_oled_on()) {
-        if (timer_elapsed32(anim_sleep) > oled_timeout) {
-            oled_off();
-            return; 
-        }
-
         if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
             anim_timer = timer_read32();
             animation_phase();
@@ -308,11 +300,27 @@ static void render_anim(void) {
 // Tarefa principal do OLED
 // =============================================
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        render_status(); // Lado esquerdo (mestre) com layout vertical
-    } else {
-        render_anim(); // Lado direito (escravo) com animação
+    // --- Lógica de Timeout (agora para AMBOS os lados) ---
+    // Se houver qualquer digitação, "acorda" o OLED e reseta o timer de inatividade.
+    if (get_current_wpm() > 0) {
+        oled_on();
+        anim_sleep = timer_read32(); // Usa a variável global já existente
     }
+
+    // Se o tempo de inatividade passou do limite, desliga o OLED.
+    if (timer_elapsed32(anim_sleep) > oled_timeout) {
+        oled_off();
+    }
+
+    // Se o OLED não estiver desligado, desenha o conteúdo de cada lado.
+    if (is_oled_on()) {
+        if (is_keyboard_master()) {
+            render_status(); // Lado esquerdo (mestre) com layout vertical
+        } else {
+            render_anim();   // Lado direito (escravo) com animação
+        }
+    }
+    
     return false;
 }
 

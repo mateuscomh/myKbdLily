@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
@@ -27,10 +28,10 @@
 
 // Variáveis globais
 char     wpm_str[10];
-uint32_t anim_timer         = 0;
-uint32_t anim_sleep         = 0;
+uint32_t anim_timer = 0;
+uint32_t anim_sleep = 0;
 uint8_t  current_idle_frame = 0;
-uint8_t  current_tap_frame  = 0;
+uint8_t  current_tap_frame = 0;
 static long int oled_timeout = 120000;
 
 // Nomes das camadas
@@ -63,24 +64,24 @@ static const char PROGMEM vertical_bar_segments[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
         /* QWERTY 
-     * ,-----------------------------------------.                    ,-----------------------------------------.
-     * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
-     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
-     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * |LSHIF |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
-     * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
-     * |LOWER |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |ENTER |
-     * `-----------------------------------------/       /     \      \-----------------------------------------'
-     *                   | LAlt | LGUI |LCTRL | /Space  /       \Backs \  |RAISE |DELETE| RALT |
-     *                   |      |      |      |/       /         \      \ |      |      |      |
-     *                   `----------------------------'           '------''--------------------'
-     */
+         * ,-----------------------------------------.                    ,-----------------------------------------.
+         * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+         * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+         * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
+         * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+         * |LSHIF |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+         * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+         * |LOWER |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |ENTER |
+         * `-----------------------------------------/       /     \      \-----------------------------------------'
+         *                   | LAlt | LGUI |LCTRL | /Space  /       \Backs \  |RAISE |DELETE| RALT |
+         *                   |      |      |      |/       /         \      \ |      |      |      |
+         *                   `----------------------------'           '------''--------------------'
+         */
         QK_GESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
         KC_LSFT,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        MO(_LOWER),KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_LBRC,   KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-                                     KC_LALT, KC_LGUI, KC_LCTL, KC_SPC,    KC_BSPC,   MO(_RAISE),KC_DEL,  KC_RALT
+        MO(_LOWER),KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_LBRC,   KC_RBRC, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
+                                  KC_LALT, KC_LGUI, KC_LCTL, KC_SPC,    KC_BSPC,   MO(_RAISE),KC_DEL,  KC_RALT
     ),
     /* LOWER
      * ,----------------------------------------.                    ,-----------------------------------------.
@@ -103,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, MS_BTN3, KC_ENT,    KC_BSLS,  _______, _______, _______, _______, KC_BSLS, KC_PIPE,
                                  KC_BSPC, _______, _______, _______,   _______,  _______, _______, _______
     ),
-     /* RAISE
+    /* RAISE
      * ,-----------------------------------------.                    ,-----------------------------------------.
      * | CAPS |      |      |      |      |      |                    | PREV | PLAY | NEXT | VOL- | VOL+ | HOME |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -117,7 +118,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                   |      |      |      |/       /         \      \ |      |      |      |
      *                   `----------------------------'           '------''--------------------'
      */
-
     [_RAISE] = LAYOUT(
         KC_CAPS, _______, _______, _______, _______, _______,                      KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_HOME,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_PGUP,
@@ -148,14 +148,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-
 // =============================================
 //               FUNÇÕES DE CAMADAS
 // =============================================
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
-
 
 // =============================================
 //               FUNÇÕES DO OLED
@@ -189,7 +187,6 @@ static void draw_vertical_wpm_bar(void) {
     }
 }
 
-
 // Função de inicialização do OLED
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (!is_keyboard_master()) {
@@ -198,7 +195,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     // Define e retorna a rotação vertical. Se ficar de cabeça para baixo, troque para OLED_ROTATION_90.
     return OLED_ROTATION_270;
 }
-
 
 // Renderiza o status no OLED (lado esquerdo) - VERSÃO VERTICAL FINAL
 static void render_status(void) {
@@ -233,6 +229,7 @@ static void render_status(void) {
     // --- Coluna da Barra (à Direita) ---
     draw_vertical_wpm_bar();
 }
+
 
 // =============================================
 // Animação do OLED (Lado Direito)
@@ -284,7 +281,6 @@ static void animation_phase(void) {
     }
 }
 
-// Função "Gerente" da animação: Gerencia o tempo e o estado do OLED.
 // Função "Gerente" da animação: Gerencia o tempo e o estado do OLED.
 static void render_anim(void) {
     // Apenas verifica se o OLED está ligado para desenhar a animação

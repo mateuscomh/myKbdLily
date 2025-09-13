@@ -63,7 +63,7 @@ static const char PROGMEM vertical_bar_segments[] = {
 // =============================================
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
-        /* QWERTY 
+        /* QWERTY
          * ,-----------------------------------------.                    ,-----------------------------------------.
          * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
          * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
         MS_WHLU, _______, KC_UP,   _______, MS_WHLL, MS_BTN1,                      _______, _______, _______, KC_LPRN, KC_RPRN, KC_BSLS,
         MS_WHLD, KC_LEFT, KC_DOWN, KC_RGHT, MS_WHLR, MS_BTN2,                      KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, KC_GRV,
-        _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, MS_BTN3, KC_ENT,    KC_BSLS,  _______, _______, _______, _______, KC_BSLS, KC_PIPE,
+        _______, MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, MS_BTN3, KC_ENT,    KC_BSLS,  _______, _______, _______, _______, KC_BSLS, KC_PIPE,
                                  KC_BSPC, _______, _______, _______,   _______,  _______, _______, _______
     ),
     /* RAISE
@@ -120,8 +120,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_RAISE] = LAYOUT(
         KC_CAPS, _______, _______, _______, _______, _______,                      KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_HOME,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_PGUP,
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BTN2, KC_PGDN,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, MS_BTN1, KC_PGUP,
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, MS_BTN2, KC_PGDN,
         MO(_LOWER),KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_BSLS,   KC_SLSH,  KC_PLUS, KC_MINS, KC_PAST, KC_PSLS, KC_PEQL, KC_END,
                                  _______, _______, _______, _______,   _______,  _______, KC_RCTL, KC_PSCR
     ),
@@ -162,9 +162,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Função para desenhar a BARRA DE WPM VERTICAL que cresce de baixo para cima
 static void draw_vertical_wpm_bar(void) {
     uint8_t wpm = get_current_wpm();
-    const uint8_t peak_wpm = 150; 
+    const uint8_t peak_wpm = 150;
     // A área da barra tem 104 pixels de altura (13 linhas de 8px)
-    const uint8_t bar_pixel_height_max = 104; 
+    const uint8_t bar_pixel_height_max = 104;
 
     // Calcula a altura atual da barra em pixels
     uint8_t bar_pixel_height = (wpm > peak_wpm) ? bar_pixel_height_max : (wpm * bar_pixel_height_max) / peak_wpm;
@@ -198,13 +198,13 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 // Renderiza o status no OLED (lado esquerdo) - VERSÃO VERTICAL FINAL
 static void render_status(void) {
-    oled_clear(); 
+    oled_clear();
 
     // --- Coluna de Texto (à Esquerda) ---
     // Informações de Camada
-    oled_set_cursor(0, 0); 
+    oled_set_cursor(0, 0);
     oled_write_P(PSTR("LAYER:"), false);
-    oled_set_cursor(0, 1); 
+    oled_set_cursor(0, 1);
     switch (get_highest_layer(layer_state)) {
         case _LOWER:  oled_write_P(PSTR("Lower"), false); break;
         case _RAISE:  oled_write_P(PSTR("Raise"), false); break;
@@ -225,7 +225,7 @@ static void render_status(void) {
         oled_set_cursor(0, 6);
         oled_write_P(PSTR("CAPS"), false);
     }
-    
+
     // --- Coluna da Barra (à Direita) ---
     draw_vertical_wpm_bar();
 }
@@ -316,7 +316,7 @@ bool oled_task_user(void) {
             render_anim();   // Lado direito (escravo) com animação
         }
     }
-    
+
     return false;
 }
 

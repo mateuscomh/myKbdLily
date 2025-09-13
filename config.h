@@ -31,8 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SPLIT_WATCHDOG_TIMEOUT 3000
 
 // oled configs
-#define OLED_TIMEOUT 120000
-#define OLED_BRIGHTNESS 150
+#define OLED_TIMEOUT 300000
+#define OLED_BRIGHTNESS 130
 
 #define MOUSE_DELAY 12
 #define MOUSEKEY_MAX_SPEED 2
@@ -40,6 +40,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSE_MOVE_DELTA 4
 #define MOUSEKEY_INTERVAL 16
 
+
+// #define TAP_DANCE_ENABLE
+
+/* Previne que modificadores fiquem "presos" em algumas situações */
+#define PREVENT_STUCK_MODIFIERS
+
+#define USB_POOLING_INTERVAL_MS 10
 #define SPLIT_WPM_ENABLE
+#define TAPPING_TERM 175
+#define TAPPING_TERM_PER_KEY
 //#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 1000

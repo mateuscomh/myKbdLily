@@ -31,8 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SPLIT_WATCHDOG_TIMEOUT 1500
 
 // oled configs
-#define OLED_TIMEOUT 360000
-#define OLED_BRIGHTNESS 150
+#define OLED_TIMEOUT 300000
+#define OLED_BRIGHTNESS 130
 
 #define MOUSEKEY_DELAY 12
 #define MOUSEKEY_MAX_SPEED 4

@@ -32,7 +32,7 @@ uint32_t anim_timer = 0;
 uint32_t anim_sleep = 0;
 uint8_t  current_idle_frame = 0;
 uint8_t  current_tap_frame = 0;
-static long int oled_timeout = 360000; //6min
+static long int oled_timeout = 300000; //5min
 
 // Nomes das camadas
 enum layer_number {

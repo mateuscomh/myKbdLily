@@ -32,7 +32,7 @@ uint32_t anim_timer = 0;
 uint32_t anim_sleep = 0;
 uint8_t  current_idle_frame = 0;
 uint8_t  current_tap_frame = 0;
-static long int oled_timeout = 120000;
+static long int oled_timeout = 360000; //6min
 
 // Nomes das camadas
 enum layer_number {
@@ -129,11 +129,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-----------------------------------------.                    ,-----------------------------------------.
      * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | CAPS |      |      |      |      |      |                    |      |      |      |      |      |      |
+     * | CAPS |      |  M.U | MB.1 |      |      |                    |      |      |      |      |      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
+     * |      | M.L  |  M.D | M.R  |      |      |-------.    ,-------|  M.L |  M.D |  M.U |  M.R | MB.1 | MB.2 |
      * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
-     * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+     * |      |      |      | MB.2 |      |      |-------|    |-------|      |      |      |      |      |      |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
      *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
      *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -141,9 +141,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_ADJUST] = LAYOUT(
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        KC_CAPS, XXXXXXX, MS_UP, MS_BTN1, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, MS_LEFT, MS_DOWN, MS_RGHT, XXXXXXX, XXXXXXX,                      MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, MS_BTN1, MS_BTN2,
+        XXXXXXX, XXXXXXX, XXXXXXX, MS_BTN2, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                  _______, _______, _______, _______,   _______,  _______, _______, _______
     )
 };

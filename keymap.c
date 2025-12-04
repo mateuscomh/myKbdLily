@@ -87,11 +87,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,----------------------------------------.                    ,-----------------------------------------.
      * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | M.ScU |     |  UP  |     | M.ScL | MB.1 |                    |      |      |      |   (  |   )  |   |/ |
+     * | M.ScU |     |  UP  |      | BACK| MB.1 |                    |      |      |      |      | HOME |  PGU |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | M.ScD | LFT | DWN | RGT | M.ScR | MB.2  |-------.    ,-------|      |      |      |      |      |  `  |
+     * | M.ScD | LFT | DWN | RGT | FWRD | MB.2  |-------.    ,-------| LFT  | DOWN |  UP  | RGT  |  END |  PGD |
      * |------+------+------+------+------+------| ENTER |    |   |/  |------+------+------+------+------+------|
-     * |      | M.Le | M.Do | M.Up | M.Ri | MB.3  |-------|    |-------|      |      |      |      |  \   |   |  |
+     * |      | M.Le | M.Do | M.Up | M.Ri | MB.3  |-------|    |-------|     |      |      |      |  /   |   |  |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
      *                   | BSPC | LGUI |LOWER | /Space  /       \Backs \  |RAISE |DELETE| RALT |
      *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -99,8 +99,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_LOWER] = LAYOUT(
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-        MS_WHLU, _______, KC_UP,   _______, MS_WHLL, MS_BTN1,                      _______, _______, _______, KC_LPRN, KC_RPRN, KC_BSLS,
-        MS_WHLD, KC_LEFT, KC_DOWN, KC_RGHT, MS_WHLR, MS_BTN2,                      KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, KC_GRV,
+        MS_WHLU, _______, KC_UP,   _______, KC_WBAK, MS_BTN1,                      _______, _______, _______, _______, KC_HOME, KC_PGUP,
+        MS_WHLD, KC_LEFT, KC_DOWN, KC_RGHT, KC_WFWD, MS_BTN2,                      KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_END, KC_PGDN,
         _______, MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, MS_BTN3, KC_ENT,    KC_BSLS,  _______, _______, _______, _______, KC_BSLS, KC_PIPE,
                                  KC_BSPC, _______, _______, _______,   _______,  _______, _______, _______
     ),

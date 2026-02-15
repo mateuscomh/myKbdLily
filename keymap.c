@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-----------------------------------------.                    ,-----------------------------------------.
      * | CAPS |      |      |      |      |      |                    | PREV | PLAY | NEXT | VOL- | VOL+ | HOME |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * |   `  |   1  |   2  |   3  |   4  |   5  |                    |  M.L |  M.D |  M.U |  M.R | MB.1 | PGUP |
+     * |   `  | MUTE |      |      |      |      |                    |  M.L |  M.D |  M.U |  M.R | MB.1 | PGUP |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
      * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |-------.    ,-------| Left | Down |  Up  |Right | MB.2 | PGDW |
      * |------+------+------+------+------+------|   \   |    |   /   |------+------+------+------+------+------|
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_RAISE] = LAYOUT(
         KC_CAPS, _______, _______, _______, _______, _______,                      KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_HOME,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, MS_BTN1, KC_PGUP,
+        KC_GRV,  KC_MUTE, _______, _______, _______, _______,                         MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, MS_BTN1, KC_PGUP,
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, MS_BTN2, KC_PGDN,
         MO(_LOWER),KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_BSLS,   KC_SLSH,  KC_PLUS, KC_MINS, KC_PAST, KC_PSLS, KC_PEQL, KC_END,
                                  _______, _______, _______, _______,   _______,  _______, KC_RCTL, KC_PSCR
